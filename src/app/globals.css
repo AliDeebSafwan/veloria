@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/*
+  ── Design tokens ──────────────────────────────────────────────
+  Sampled directly from the supplied VELORIA brand assets (logo,
+  packaging photography, promotional stills). See
+  /docs/creative-direction.md for the full rationale — nothing here
+  is invented independently of that analysis.
+  ------------------------------------------------------------------ */
+@theme {
+  --color-ivory-50: #f5f3ee;
+  --color-ivory-100: #ede7dd;
+  --color-stone-200: #dad4c9;
+
+  --color-gold-highlight: #d4b98a;
+  --color-gold-core: #b8924d;
+  --color-gold-shadow: #8c6d35;
+  /*
+    Text-safe gold: gold-core is only 2.6:1 against ivory-50 (fails
+    WCAG AA, which needs 4.5:1) — it reads fine as a border or a
+    two-second hover flash, but not as small tracked-caps labels sat
+    on the page indefinitely, which is how it was actually being used
+    throughout the site. Same hue/saturation as gold-core, darkened
+    until it clears 4.5:1 (verified 5.17:1 on ivory-50, 4.66:1 on
+    ivory-100). Use this — not gold-core/gold-highlight — for any
+    gold text on a light background; gold-core/highlight/shadow stay
+    for borders, dividers, and decorative gradients, where contrast
+    rules don't apply the same way.
+  */
+  --color-gold-deep: #7d6232;
+
+  --color-ink: #1c1915;
+
+  --font-sans: var(--font-sans-body), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-display), ui-serif, Georgia, serif;
+  --font-arabic: var(--font-arabic), "Traditional Arabic", serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-ivory-50);
+  color: var(--color-ink);
+}
+
+/*
+  On-brand keyboard focus ring. Left unstyled, focus defaults to the
+  browser's blue outline, which reads as generic against the gold/
+  ivory palette and is the kind of default-template detail this
+  audit is specifically about removing. Only shows for keyboard
+  navigation (:focus-visible), never on mouse click.
+*/
+:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/*
+  Visually hidden until focused — the skip-to-content link in
+  layout.tsx. Standard accessible pattern: present in the DOM and
+  reachable by keyboard, invisible otherwise.
+*/
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background-color: var(--color-ivory-50);
+  color: var(--color-ink);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  border: 1px solid var(--color-gold-core);
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/*
+  Lenis drives scrolling, so native smooth-scroll is left off here
+  to avoid the two systems fighting each other.
+*/
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+/*
+  Respect reduced-motion preferences at the OS level. GSAP timelines
+  and ScrollTrigger instances built later should also check
+  `window.matchMedia('(prefers-reduced-motion: reduce)')` before
+  running non-essential motion.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

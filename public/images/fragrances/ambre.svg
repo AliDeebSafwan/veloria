@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1000 1250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-ambre" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5F3EE"/>
+      <stop offset="55%" stop-color="#EDE7DD"/>
+      <stop offset="100%" stop-color="#DAD4C9"/>
+    </linearGradient>
+    <radialGradient id="glow-ambre" cx="50%" cy="38%" r="42%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="liquid-ambre" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4B98A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#8C6D35" stop-opacity="0.65"/>
+    </linearGradient>
+    <radialGradient id="shadow-ambre" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8C6D35" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#8C6D35" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#bg-ambre)"/>
+  <ellipse cx="500.0" cy="525.0" rx="380" ry="420" fill="url(#glow-ambre)"/>
+  <ellipse cx="500.0" cy="1002" rx="150" ry="26" fill="url(#shadow-ambre)"/>
+  <polygon points="370.0,650 500.0,590 630.0,650 630.0,910 500.0,970 370.0,910" fill="none" stroke="#B8924D" stroke-width="2.5"/>
+  <clipPath id="clip-ambre"><polygon points="370.0,650 500.0,590 630.0,650 630.0,910 500.0,970 370.0,910"/></clipPath>
+  <rect x="370.0" y="666.0" width="260" height="304.0" fill="url(#liquid-ambre)" clip-path="url(#clip-ambre)"/>
+  <line x1="370.0" y1="650" x2="630.0" y2="650" stroke="#B8924D" stroke-width="1.2" opacity="0.4"/>
+  <rect x="466.0" y="552" width="68" height="44" fill="none" stroke="#B8924D" stroke-width="2.5"/>
+  <rect x="416.0" y="486" width="168" height="66" rx="8" ry="8" fill="none" stroke="#B8924D" stroke-width="2.5"/>
+  <line x1="434.0" y1="502" x2="434.0" y2="536" stroke="#B8924D" stroke-width="1.2" opacity="0.45"/>
+  <line x1="404.0" y1="680" x2="404.0" y2="910" stroke="#F5F3EE" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+</svg>
