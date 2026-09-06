@@ -29,9 +29,26 @@ export function HeroVideo({ ref, className }: HeroVideoProps) {
       return;
     }
 
-    // Autoplay can still be blocked by the browser (e.g. low-power
-    // mode); the poster frame stays visible if play() rejects.
-    void video.play().catch(() => undefined);
+    // Only decode/play while actually on screen. Once the person
+    // scrolls past the hero it can sit off-screen for the rest of
+    // the session — there's no reason to keep decoding and looping
+    // a video nobody can see.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Autoplay can still be blocked by the browser (e.g.
+          // low-power mode); the poster frame stays visible if
+          // play() rejects.
+          void video.play().catch(() => undefined);
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(video);
+
+    return () => observer.disconnect();
   }, [reducedMotion]);
 
   return (

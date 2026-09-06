@@ -40,7 +40,7 @@ export function Footer() {
             scrollTrigger: {
               trigger: footerRef.current,
               start: SCROLL_START,
-              toggleActions: REVEAL_ONCE,
+              ...REVEAL_ONCE,
             },
           },
         );

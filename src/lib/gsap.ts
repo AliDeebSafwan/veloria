@@ -52,8 +52,30 @@ export const STAGGER = 0.1;
 /** Standard ScrollTrigger entry point — the element is ~1/4 into the viewport. */
 export const SCROLL_START = "top 75%";
 
-/** Standard one-time entrance: plays once, never reverses on scroll-back. */
-export const REVEAL_ONCE = "play none none none";
+/**
+ * Spread into a ScrollTrigger config for a one-time entrance reveal.
+ * Stronger than `toggleActions: "play none none none"` — `once: true`
+ * actually kills the ScrollTrigger the moment it fires, freeing its
+ * scroll listener for garbage collection, instead of leaving 30+ of
+ * them listening for the rest of the page's life for an animation
+ * that will never run again. Never combine with `scrub`.
+ */
+export const REVEAL_ONCE = { once: true } as const;
+
+/**
+ * True only on viewports wide enough to be treated as desktop.
+ * Non-reactive (checked once, not on resize) — used to decide once,
+ * at setup time, whether a purely decorative continuous
+ * scroll-scrubbed animation is worth its ongoing cost. Mobile CPUs
+ * are exactly where that cost is least affordable and least visible
+ * as a subtle parallax drift, so those get skipped there entirely.
+ */
+export function isDesktopViewport(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 1024px)").matches
+  );
+}
 
 /**
  * Wraps scroll-triggered entrance animations so they simply don't run

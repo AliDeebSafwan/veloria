@@ -47,7 +47,22 @@ export function AutoplayVideo({
       return;
     }
 
-    void video.play().catch(() => undefined);
+    // Only decode/play while actually on screen — this section sits
+    // well down the page, so the video would otherwise keep looping
+    // for anyone scrolled past it for the rest of the session.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          void video.play().catch(() => undefined);
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(video);
+
+    return () => observer.disconnect();
   }, [reducedMotion]);
 
   return (

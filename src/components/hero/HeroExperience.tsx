@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { gsap, ScrollTrigger, useGSAP, EASE } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, EASE, isDesktopViewport } from "@/lib/gsap";
 import { useLenis } from "@/hooks/useLenis";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Preloader } from "@/components/hero/Preloader";
@@ -143,7 +143,9 @@ export function HeroExperience() {
       // Cinematic hand-off on scroll: the film settles back and the
       // copy quietly recedes across the hero's own scroll runway,
       // rather than just vanishing when the next section arrives.
-      if (sectionRef.current) {
+      // Desktop only, same reasoning as every other continuous
+      // scroll-scrubbed effect in the site — mobile skips it.
+      if (sectionRef.current && isDesktopViewport()) {
         ScrollTrigger.create({
           trigger: sectionRef.current,
           start: "top top",

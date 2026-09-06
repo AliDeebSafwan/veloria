@@ -38,7 +38,7 @@ export function Navigation() {
         className={cn(
           "fixed inset-x-0 top-0 z-40 border-b transition-[background-color,backdrop-filter,border-color] duration-500 ease-out",
           scrolled
-            ? "border-gold-core/15 bg-ivory-50/80 backdrop-blur-md"
+            ? "border-gold-core/15 bg-ivory-50/90 backdrop-blur-sm"
             : "border-transparent bg-transparent",
         )}
       >

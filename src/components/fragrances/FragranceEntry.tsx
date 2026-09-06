@@ -8,6 +8,7 @@ import {
   gsap,
   useGSAP,
   whenMotionAllowed,
+  isDesktopViewport,
   EASE,
   DURATION,
   STAGGER,
@@ -46,7 +47,7 @@ export function FragranceEntry({ fragrance, index }: FragranceEntryProps) {
         const revealTrigger = {
           trigger: root,
           start: SCROLL_START,
-          toggleActions: REVEAL_ONCE,
+          ...REVEAL_ONCE,
         };
 
         gsap.fromTo(
@@ -82,17 +83,25 @@ export function FragranceEntry({ fragrance, index }: FragranceEntryProps) {
           },
         );
 
-        // Continuous subtle parallax drift while the entry is in view.
-        gsap.to(".fragrance-image", {
-          yPercent: 7,
-          ease: EASE.linear,
-          scrollTrigger: {
-            trigger: root,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.6,
-          },
-        });
+        // Continuous subtle parallax drift while the entry is in
+        // view — desktop only. This is the priciest kind of
+        // animation to run (a scroll-linked recalculation on every
+        // frame for as long as the section is on screen), and with
+        // four of these stacked up the page it's the first thing to
+        // cut for mobile, where the CPU budget is tightest and a
+        // few pixels of drift is the least missed.
+        if (isDesktopViewport()) {
+          gsap.to(".fragrance-image", {
+            yPercent: 7,
+            ease: EASE.linear,
+            scrollTrigger: {
+              trigger: root,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.6,
+            },
+          });
+        }
       });
 
       // Hover: extra zoom on the same image element (GSAP composites

@@ -39,7 +39,7 @@ export function FeaturedFragrances() {
             scrollTrigger: {
               trigger: sectionRef.current,
               start: SCROLL_START,
-              toggleActions: REVEAL_ONCE,
+              ...REVEAL_ONCE,
             },
           },
         );

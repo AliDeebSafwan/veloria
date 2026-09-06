@@ -6,6 +6,7 @@ import {
   gsap,
   useGSAP,
   whenMotionAllowed,
+  isDesktopViewport,
   EASE,
   DURATION,
   SCROLL_START,
@@ -30,7 +31,7 @@ export function CinematicFilmSection() {
         const revealTrigger = {
           trigger: sectionRef.current,
           start: SCROLL_START,
-          toggleActions: REVEAL_ONCE,
+          ...REVEAL_ONCE,
         };
 
         // Masked reveal — the frame opens from a small centered
@@ -71,18 +72,22 @@ export function CinematicFilmSection() {
           );
 
         // Continuous subtle scale drift while the section is in view —
-        // separate from the entrance tween above, composited on the
-        // same element without conflict since both are GSAP-owned.
-        gsap.to(".film-video", {
-          scale: 1.09,
-          ease: EASE.linear,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.8,
-          },
-        });
+        // desktop only. Scaling a playing <video> via transform on
+        // every scroll tick is meaningful extra GPU work stacked on
+        // top of decoding itself; not worth it on mobile for an
+        // effect this subtle.
+        if (isDesktopViewport()) {
+          gsap.to(".film-video", {
+            scale: 1.09,
+            ease: EASE.linear,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.8,
+            },
+          });
+        }
       });
     },
     { scope: sectionRef },

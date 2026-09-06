@@ -50,7 +50,7 @@ export function NoteStage({ stage, index, isLast }: NoteStageProps) {
         const scrollTrigger = {
           trigger: root,
           start: SCROLL_START,
-          toggleActions: REVEAL_ONCE,
+          ...REVEAL_ONCE,
         };
 
         if (!isLast) {

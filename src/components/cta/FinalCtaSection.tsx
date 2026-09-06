@@ -27,7 +27,7 @@ export function FinalCtaSection() {
         const revealTrigger = {
           trigger: sectionRef.current,
           start: SCROLL_START,
-          toggleActions: REVEAL_ONCE,
+          ...REVEAL_ONCE,
         };
 
         gsap.fromTo(

@@ -7,6 +7,7 @@ import {
   gsap,
   useGSAP,
   whenMotionAllowed,
+  isDesktopViewport,
   EASE,
   DURATION,
   SCROLL_START,
@@ -29,7 +30,7 @@ export function BrandStorySection() {
         const trigger = {
           trigger: sectionRef.current,
           start: SCROLL_START,
-          toggleActions: REVEAL_ONCE,
+          ...REVEAL_ONCE,
         };
 
         gsap.fromTo(
@@ -42,16 +43,20 @@ export function BrandStorySection() {
           { scale: 1.15 },
           { scale: 1, duration: DURATION.cinematic, ease: EASE.out, scrollTrigger: trigger },
         );
-        gsap.to(".story-image", {
-          yPercent: 6,
-          ease: EASE.linear,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.6,
-          },
-        });
+        // Desktop-only continuous parallax — see FragranceEntry for
+        // why this is gated rather than running everywhere.
+        if (isDesktopViewport()) {
+          gsap.to(".story-image", {
+            yPercent: 6,
+            ease: EASE.linear,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.6,
+            },
+          });
+        }
 
         const tl = gsap.timeline({ scrollTrigger: trigger });
         tl.fromTo(

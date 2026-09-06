@@ -14,14 +14,6 @@ import {
 } from "@/lib/gsap";
 import { BRAND_CONTACT } from "@/constants/contact";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elementName: string]: Record<string, unknown>;
-    }
-  }
-}
-
 /**
  * `id="contact"` — the nav's CONTACT link has pointed at `#contact`
  * since the navigation was first built; this is the section that
@@ -48,7 +40,7 @@ export function ContactSection() {
             scrollTrigger: {
               trigger: sectionRef.current,
               start: SCROLL_START,
-              toggleActions: REVEAL_ONCE,
+              ...REVEAL_ONCE,
             },
           },
         );
