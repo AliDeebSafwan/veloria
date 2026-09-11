@@ -5,9 +5,11 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import { NAV_LINKS } from "@/constants/nav";
 import { HERO_MEDIA, HERO_MEDIA_DIMENSIONS } from "@/constants/media";
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import { LanguageToggle } from "@/components/layout/LanguageToggle";
 
 const MARK_ASPECT = `${HERO_MEDIA_DIMENSIONS.logoMark.width} / ${HERO_MEDIA_DIMENSIONS.logoMark.height}`;
 
@@ -21,6 +23,7 @@ const MARK_ASPECT = `${HERO_MEDIA_DIMENSIONS.logoMark.width} / ${HERO_MEDIA_DIME
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     const trigger = ScrollTrigger.create({
@@ -61,28 +64,32 @@ export function Navigation() {
             </span>
           </a>
 
-          <ul className="hidden items-center gap-10 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-[11px] font-medium tracking-[0.25em] text-ink/80 transition-colors duration-300 hover:text-gold-deep"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center gap-8 lg:gap-10">
+            <ul className="hidden items-center gap-10 lg:flex">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-[11px] font-medium tracking-[0.25em] text-ink/80 transition-colors duration-300 hover:text-gold-deep"
+                  >
+                    {t.nav[link.key]}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            className="flex flex-col items-end gap-1.5 lg:hidden"
-          >
-            <span className="h-px w-6 bg-ink" />
-            <span className="h-px w-4 bg-ink" />
-          </button>
+            <LanguageToggle className="hidden lg:inline" />
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              className="flex flex-col items-end gap-1.5 lg:hidden"
+            >
+              <span className="h-px w-6 bg-ink" />
+              <span className="h-px w-4 bg-ink" />
+            </button>
+          </div>
         </div>
       </header>
 

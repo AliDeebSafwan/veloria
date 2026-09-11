@@ -14,6 +14,7 @@ import {
 } from "@/lib/gsap";
 import { NAV_LINKS } from "@/constants/nav";
 import { BRAND_CONTACT } from "@/constants/contact";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
  * Deliberately reads as a closing page, not a utility footer: one
@@ -24,6 +25,7 @@ import { BRAND_CONTACT } from "@/constants/contact";
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const year = new Date().getFullYear();
+  const { t } = useLanguage();
 
   useGSAP(
     () => {
@@ -66,7 +68,7 @@ export function Footer() {
         </span>
 
         <p className="footer-line mt-5 text-xs font-medium tracking-[0.35em] text-gold-deep">
-          ESSENCE OF ELEGANCE
+          {t.footer.tagline}
         </p>
 
         <nav
@@ -79,7 +81,7 @@ export function Footer() {
                 href={link.href}
                 className="px-4 text-[11px] font-medium tracking-[0.3em] text-ink/70 transition-colors duration-300 hover:text-gold-deep"
               >
-                {link.label}
+                {t.nav[link.key]}
               </a>
               {index < NAV_LINKS.length - 1 && (
                 <span className="h-3 w-px bg-gold-core/25" aria-hidden="true" />
@@ -114,7 +116,7 @@ export function Footer() {
         />
 
         <p className="footer-line mt-8 text-[11px] tracking-[0.2em] text-ink/70">
-          © {year} VELORIA. ALL RIGHTS RESERVED.
+          © {year} VELORIA. {t.footer.copyright}
         </p>
       </div>
     </footer>

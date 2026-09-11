@@ -1,6 +1,6 @@
 import { HeroExperience } from "@/components/hero/HeroExperience";
-import { FeaturedFragrances } from "@/components/fragrances/FeaturedFragrances";
 import { FragranceNotesSection } from "@/components/notes/FragranceNotesSection";
+import { CraftsmanshipSection } from "@/components/craft/CraftsmanshipSection";
 import { BrandStorySection } from "@/components/story/BrandStorySection";
 import { CinematicFilmSection } from "@/components/film/CinematicFilmSection";
 import { FinalCtaSection } from "@/components/cta/FinalCtaSection";
@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <main id="main-content">
       <HeroExperience />
-      <FeaturedFragrances />
       <FragranceNotesSection />
+      <CraftsmanshipSection />
       <BrandStorySection />
       <CinematicFilmSection />
       <FinalCtaSection />

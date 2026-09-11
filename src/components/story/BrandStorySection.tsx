@@ -14,6 +14,7 @@ import {
   REVEAL_ONCE,
 } from "@/lib/gsap";
 import { STORY_MEDIA } from "@/constants/media";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
  * "THE ESSENCE OF VELORIA" — deliberately sparse copy. The image
@@ -23,6 +24,7 @@ import { STORY_MEDIA } from "@/constants/media";
  */
 export function BrandStorySection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   useGSAP(
     () => {
@@ -43,8 +45,10 @@ export function BrandStorySection() {
           { scale: 1.15 },
           { scale: 1, duration: DURATION.cinematic, ease: EASE.out, scrollTrigger: trigger },
         );
-        // Desktop-only continuous parallax — see FragranceEntry for
-        // why this is gated rather than running everywhere.
+        // Desktop-only continuous parallax — same reasoning used
+        // throughout the site: purely decorative scroll-linked
+        // animation is the first thing to cut on mobile, where CPU
+        // budget is tightest and the effect is least noticeable.
         if (isDesktopViewport()) {
           gsap.to(".story-image", {
             yPercent: 6,
@@ -95,11 +99,11 @@ export function BrandStorySection() {
 
         <div className="flex flex-col justify-center px-6 py-16 lg:order-2 lg:col-span-5 lg:px-16 lg:py-24">
           <p className="story-label text-xs font-medium tracking-[0.35em] text-gold-deep">
-            THE ESSENCE OF VELORIA
+            {t.story.label}
           </p>
           <h2 className="mt-6 font-serif text-4xl leading-[1.1] text-ink lg:text-6xl">
-            <span className="story-line block">More than a fragrance.</span>
-            <span className="story-line block">A presence.</span>
+            <span className="story-line block">{t.story.line1}</span>
+            <span className="story-line block">{t.story.line2}</span>
           </h2>
         </div>
       </div>

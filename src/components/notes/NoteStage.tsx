@@ -12,10 +12,10 @@ import {
   SCROLL_START,
   REVEAL_ONCE,
 } from "@/lib/gsap";
-import type { NoteStageData } from "@/data/notes-journey";
+import type { NoteStageTranslation } from "@/i18n/translations";
 
 interface NoteStageProps {
-  stage: NoteStageData;
+  stage: NoteStageTranslation;
   index: number;
   isLast: boolean;
 }

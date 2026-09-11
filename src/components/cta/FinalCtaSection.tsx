@@ -12,6 +12,7 @@ import {
   SCROLL_START,
   REVEAL_ONCE,
 } from "@/lib/gsap";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
  * Deliberately sparse — the hero already delivered the big brand
@@ -20,6 +21,7 @@ import {
  */
 export function FinalCtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   useGSAP(
     () => {
@@ -73,10 +75,10 @@ export function FinalCtaSection() {
     >
       <div className="mx-auto max-w-xl px-6 py-28 text-center lg:py-40">
         <p className="cta-line font-serif text-2xl tracking-wide text-ink lg:text-3xl">
-          VELORIA
+          {t.cta.wordmark}
         </p>
         <p className="cta-line mt-3 text-xs font-medium tracking-[0.35em] text-gold-deep">
-          ESSENCE OF ELEGANCE
+          {t.cta.tagline}
         </p>
 
         <span
@@ -85,7 +87,7 @@ export function FinalCtaSection() {
         />
 
         <h2 className="cta-line mt-8 font-serif text-5xl italic leading-tight text-ink lg:text-7xl">
-          Leave an impression.
+          {t.cta.statement}
         </h2>
 
         <a
@@ -107,7 +109,7 @@ export function FinalCtaSection() {
             }}
             aria-hidden="true"
           />
-          <span className="relative z-10">DISCOVER VELORIA</span>
+          <span className="relative z-10">{t.cta.button}</span>
         </a>
       </div>
     </section>

@@ -13,9 +13,17 @@ import {
   REVEAL_ONCE,
 } from "@/lib/gsap";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import { NoteStage } from "@/components/notes/NoteStage";
+import { CraftEntry } from "@/components/craft/CraftEntry";
+import { CRAFT_IMAGES } from "@/data/craft";
 
-export function FragranceNotesSection() {
+/**
+ * `id="collection"` — this section now serves as the site's main
+ * showcase, replacing the old 4-fragrance catalog. The nav's
+ * COLLECTION link and the hero CTA both already pointed at
+ * `#collection`; retargeting the id here means neither Navigation.tsx
+ * nor Hero.tsx needed to change at all.
+ */
+export function CraftsmanshipSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
 
@@ -23,7 +31,7 @@ export function FragranceNotesSection() {
     () => {
       whenMotionAllowed(() => {
         gsap.fromTo(
-          ".notes-intro-copy",
+          ".craft-intro-copy",
           { autoAlpha: 0, y: 20 },
           {
             autoAlpha: 1,
@@ -46,28 +54,25 @@ export function FragranceNotesSection() {
   return (
     <section
       ref={sectionRef}
-      id="notes"
+      id="collection"
       className="border-t border-gold-core/10 bg-ivory-50"
     >
       <div className="mx-auto max-w-7xl px-6 pb-4 pt-20 text-center lg:px-10 lg:pt-32">
-        <p className="notes-intro-copy text-xs font-medium tracking-[0.35em] text-gold-deep">
-          {t.notes.label}
+        <p className="craft-intro-copy text-xs font-medium tracking-[0.35em] text-gold-deep">
+          {t.craft.label}
         </p>
-        <h2 className="notes-intro-copy mx-auto mt-4 max-w-2xl font-serif text-4xl leading-tight text-ink lg:text-6xl">
-          {t.notes.heading}
+        <h2 className="craft-intro-copy mx-auto mt-4 max-w-xl font-serif text-4xl leading-tight text-ink lg:text-6xl">
+          {t.craft.heading}
         </h2>
-        <p className="notes-intro-copy mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-ink/70">
-          {t.notes.intro}
-        </p>
       </div>
 
-      <div className="mx-auto max-w-5xl">
-        {t.notes.stages.map((stage, index) => (
-          <NoteStage
-            key={stage.label}
-            stage={stage}
+      <div className="divide-y divide-gold-core/10">
+        {t.craft.entries.map((entry, index) => (
+          <CraftEntry
+            key={CRAFT_IMAGES[index]}
+            image={CRAFT_IMAGES[index]}
+            entry={entry}
             index={index}
-            isLast={index === t.notes.stages.length - 1}
           />
         ))}
       </div>

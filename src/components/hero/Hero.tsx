@@ -1,7 +1,10 @@
+"use client";
+
 import type { RefObject } from "react";
 
 import { HeroVideo } from "@/components/hero/HeroVideo";
 import { ScrollIndicator } from "@/components/hero/ScrollIndicator";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export interface HeroRefs {
   sectionRef: RefObject<HTMLElement | null>;
@@ -48,6 +51,7 @@ export function Hero({ refs }: HeroProps) {
     ctaRef,
     scrollIndicatorRef,
   } = refs;
+  const { t } = useLanguage();
 
   return (
     <section ref={sectionRef} className="relative h-[145dvh] md:h-[175dvh]">
@@ -80,7 +84,7 @@ export function Hero({ refs }: HeroProps) {
             ref={taglineRef}
             className="text-xs font-medium tracking-[0.35em] text-gold-highlight motion-safe:translate-y-3 motion-safe:opacity-0 md:text-sm md:text-gold-deep"
           >
-            ESSENCE OF ELEGANCE
+            {t.hero.tagline}
           </p>
 
           <a
@@ -88,7 +92,7 @@ export function Hero({ refs }: HeroProps) {
             href="#collection"
             className="mt-3 text-[11px] font-medium tracking-[0.25em] text-ivory-50 underline decoration-gold-core/70 underline-offset-[6px] transition-opacity hover:opacity-70 motion-safe:translate-y-3 motion-safe:opacity-0 md:text-ink"
           >
-            DISCOVER THE COLLECTION
+            {t.hero.cta}
           </a>
         </div>
 

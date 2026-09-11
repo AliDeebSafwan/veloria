@@ -13,6 +13,7 @@ import {
   REVEAL_ONCE,
 } from "@/lib/gsap";
 import { BRAND_CONTACT } from "@/constants/contact";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
  * `id="contact"` — the nav's CONTACT link has pointed at `#contact`
@@ -24,6 +25,7 @@ import { BRAND_CONTACT } from "@/constants/contact";
  */
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   useGSAP(
     () => {
@@ -57,22 +59,17 @@ export function ContactSection() {
     >
       <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center lg:py-32">
         <p className="contact-line text-xs font-medium tracking-[0.35em] text-gold-deep">
-          GET IN TOUCH
+          {t.contact.label}
         </p>
         <h2 className="contact-line mt-4 font-serif text-4xl leading-tight text-ink lg:text-6xl">
-          Visit us, or simply say hello.
+          {t.contact.heading}
         </h2>
 
         <div className="contact-line mt-12 flex flex-col items-center gap-1.5">
           <p className="font-serif text-lg tracking-wide text-ink">
-            {BRAND_CONTACT.location.city}
+            {t.contact.city}
           </p>
-          <p className="text-[13px] text-ink/70">
-            {BRAND_CONTACT.location.addressEn}
-          </p>
-          <p dir="rtl" className="mt-1 font-arabic text-[15px] text-ink/70">
-            {BRAND_CONTACT.location.addressAr}
-          </p>
+          <p className="text-[13px] text-ink/70">{t.contact.address}</p>
         </div>
 
         <span
@@ -90,7 +87,7 @@ export function ContactSection() {
             className="absolute inset-0 origin-left scale-x-0 bg-gold-core transition-transform duration-500 ease-out group-hover:scale-x-100"
             aria-hidden="true"
           />
-          <span className="relative z-10">CHAT ON WHATSAPP</span>
+          <span className="relative z-10">{t.contact.whatsappButton}</span>
         </a>
 
         <div className="contact-line mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[11px] font-medium tracking-[0.25em] text-ink/70">

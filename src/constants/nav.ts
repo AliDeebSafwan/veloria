@@ -1,11 +1,12 @@
+/** `key` looks up the label text in the translation dictionary (t.nav[key]) so the same link list works in either language. */
 export interface NavLink {
-  label: string;
+  key: "home" | "collection" | "about" | "contact";
   href: string;
 }
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "HOME", href: "#" },
-  { label: "COLLECTION", href: "#collection" },
-  { label: "ABOUT", href: "#about" },
-  { label: "CONTACT", href: "#contact" },
+  { key: "home", href: "#" },
+  { key: "collection", href: "#collection" },
+  { key: "about", href: "#about" },
+  { key: "contact", href: "#contact" },
 ];

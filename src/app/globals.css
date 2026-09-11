@@ -34,7 +34,20 @@
 
   --font-sans: var(--font-sans-body), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif-display), ui-serif, Georgia, serif;
-  --font-arabic: var(--font-arabic), "Traditional Arabic", serif;
+  --font-arabic: var(--font-arabic-body), "Traditional Arabic", serif;
+}
+
+/*
+  When the language toggle sets dir="rtl", every existing font-serif/
+  font-sans utility class site-wide automatically resolves to the
+  Arabic face instead — no component needs its own per-language font
+  class. Latin display faces like Playfair Display don't have Arabic
+  glyphs, so without this, Arabic text would silently fall back to a
+  generic system font instead of Noto Naskh Arabic.
+*/
+[dir="rtl"] {
+  --font-serif: var(--font-arabic-body), "Traditional Arabic", serif;
+  --font-sans: var(--font-arabic-body), "Traditional Arabic", serif;
 }
 
 html,

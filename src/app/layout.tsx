@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display, Noto_Naskh_Arabic } from "next/font/google";
 
 import { SmoothScrollProvider } from "@/providers/SmoothScrollProvider";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
@@ -38,7 +39,7 @@ const displayFont = Playfair_Display({
 
 const arabicFont = Noto_Naskh_Arabic({
   subsets: ["arabic"],
-  variable: "--font-arabic",
+  variable: "--font-arabic-body",
   display: "swap",
 });
 
@@ -58,15 +59,17 @@ export default function RootLayout({
       className={`${bodyFont.variable} ${displayFont.variable} ${arabicFont.variable}`}
     >
       <body>
-        <SmoothScrollProvider>
-          <a href="#main-content" className="skip-link">
-            SKIP TO CONTENT
-          </a>
-          <Navigation />
-          {children}
-          <Footer />
-          <CustomCursor />
-        </SmoothScrollProvider>
+        <LanguageProvider>
+          <SmoothScrollProvider>
+            <a href="#main-content" className="skip-link">
+              SKIP TO CONTENT
+            </a>
+            <Navigation />
+            {children}
+            <Footer />
+            <CustomCursor />
+          </SmoothScrollProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,9 +1,13 @@
 /**
  * Official VELORIA contact details. Single source of truth — every
- * WhatsApp link, phone number, Instagram handle, and location string
- * anywhere in the site should import from here rather than being
- * retyped in a component. That's what makes "the number changed"
- * a one-line fix instead of a project-wide search.
+ * WhatsApp link, phone number, and Instagram handle anywhere in the
+ * site should import from here rather than being retyped in a
+ * component. That's what makes "the number changed" a one-line fix
+ * instead of a project-wide search.
+ *
+ * Location (city/address) is NOT here — it's copy that changes per
+ * language, so it lives in `src/i18n/translations.ts` (`t.contact.city`
+ * / `t.contact.address`) alongside everything else that's translated.
  */
 export const BRAND_CONTACT = {
   phone: {
@@ -19,10 +23,4 @@ export const BRAND_CONTACT = {
     handle: "@Veloria_leb",
     url: "https://www.instagram.com/veloria_leb/",
   },
-  location: {
-    city: "HERMEL",
-    addressEn: "Entrance of Souk Al-Daya'a, Lebanon",
-    addressAr: "الهرمل – مدخل سوق الضيعة",
-  },
-  nameAr: "فيلوريا",
 } as const;

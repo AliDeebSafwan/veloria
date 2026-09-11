@@ -13,17 +13,21 @@ import {
   REVEAL_ONCE,
 } from "@/lib/gsap";
 import { AutoplayVideo } from "@/components/media/AutoplayVideo";
-import { FILM_MEDIA } from "@/constants/media";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { FILM_MEDIA, FILM_MEDIA_DIMENSIONS } from "@/constants/media";
+
+const FILM_ASPECT = `${FILM_MEDIA_DIMENSIONS.video.width} / ${FILM_MEDIA_DIMENSIONS.video.height}`;
 
 /**
  * The one deliberate departure from the site's ivory palette — a dark
- * stage for the same packaging film shown in the hero, framed and
- * paced completely differently: masked open on scroll, then a slow
- * continuous scale/parallax drift for as long as the section is in
- * view, rather than the hero's static framed panel.
+ * stage for its own dedicated widescreen film, framed and paced
+ * completely differently from the hero's portrait packaging clip:
+ * masked open on scroll, then a slow continuous scale drift for as
+ * long as the section is in view.
  */
 export function CinematicFilmSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   useGSAP(
     () => {
@@ -38,7 +42,7 @@ export function CinematicFilmSection() {
         // rectangle out to its full size.
         gsap.fromTo(
           ".film-frame",
-          { clipPath: "inset(32% 38% 32% 38%)" },
+          { clipPath: "inset(30% 20% 30% 20%)" },
           {
             clipPath: "inset(0% 0% 0% 0%)",
             duration: DURATION.slow + 0.4,
@@ -78,7 +82,7 @@ export function CinematicFilmSection() {
         // effect this subtle.
         if (isDesktopViewport()) {
           gsap.to(".film-video", {
-            scale: 1.09,
+            scale: 1.08,
             ease: EASE.linear,
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -100,18 +104,21 @@ export function CinematicFilmSection() {
     >
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
         <p className="film-label text-xs font-medium tracking-[0.35em] text-gold-highlight">
-          THE FILM
+          {t.film.label}
         </p>
         <h2 className="film-heading mx-auto mt-4 font-serif text-3xl leading-tight text-ivory-50 lg:text-5xl">
-          Every detail, considered.
+          {t.film.heading}
         </h2>
       </div>
 
-      <div className="film-frame relative mx-auto mt-14 h-[62vh] max-h-[680px] overflow-hidden border border-gold-core/25 lg:mt-20 lg:h-[74vh]" style={{ aspectRatio: "478 / 850" }}>
+      <div
+        className="film-frame relative mx-auto mt-14 w-[92vw] max-w-5xl overflow-hidden border border-gold-core/25 lg:mt-20"
+        style={{ aspectRatio: FILM_ASPECT }}
+      >
         <AutoplayVideo
           className="film-video h-full w-full object-cover"
           poster={FILM_MEDIA.poster}
-          preload="metadata"
+          preload="none"
           sources={[
             { src: FILM_MEDIA.videoWebm, type: "video/webm" },
             { src: FILM_MEDIA.videoMp4, type: "video/mp4" },
@@ -120,7 +127,7 @@ export function CinematicFilmSection() {
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent p-5 lg:p-7">
           <p className="film-caption text-[11px] font-medium tracking-[0.3em] text-gold-highlight">
-            VELORIA — ESSENCE OF ELEGANCE
+            {t.film.caption}
           </p>
         </div>
       </div>
