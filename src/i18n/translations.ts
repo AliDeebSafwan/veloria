@@ -1,14 +1,5 @@
 export type Language = "en" | "ar";
 
-export interface NoteStageTranslation {
-  numeral: string;
-  label: string;
-  title: string;
-  duration: string;
-  description: string;
-  notes: string[];
-}
-
 export interface CraftEntryTranslation {
   type: "paragraph" | "list";
   imageAlt: string;
@@ -28,12 +19,6 @@ export interface Translation {
   hero: {
     tagline: string;
     cta: string;
-  };
-  notes: {
-    label: string;
-    heading: string;
-    intro: string;
-    stages: NoteStageTranslation[];
   };
   craft: {
     label: string;
@@ -81,41 +66,6 @@ export const translations: Record<Language, Translation> = {
     hero: {
       tagline: "ESSENCE OF ELEGANCE",
       cta: "DISCOVER THE COLLECTION",
-    },
-    notes: {
-      label: "THE COMPOSITION",
-      heading: "Every Fragrance, In Three Movements",
-      intro:
-        "A VELORIA fragrance is never one impression — it unfolds in sequence across the hours it's worn.",
-      stages: [
-        {
-          numeral: "I",
-          label: "TOP NOTES",
-          title: "Top Notes",
-          duration: "0 – 15 MINUTES",
-          description:
-            "The first impression — bright, brief, gone almost as soon as it arrives.",
-          notes: ["Bergamot", "Pink Pepper", "Mandarin", "Citrus Zest"],
-        },
-        {
-          numeral: "II",
-          label: "HEART NOTES",
-          title: "Heart Notes",
-          duration: "15 MINUTES – 4 HOURS",
-          description:
-            "The soul of the fragrance, emerging as the top fades — where its true character lives.",
-          notes: ["Jasmine", "Iris", "Rose", "Orange Blossom"],
-        },
-        {
-          numeral: "III",
-          label: "BASE NOTES",
-          title: "Base Notes",
-          duration: "4+ HOURS",
-          description:
-            "The foundation that lingers long after — deep, warm, and unmistakably yours.",
-          notes: ["Amber", "Sandalwood", "White Musk", "Vanilla"],
-        },
-      ],
     },
     craft: {
       label: "OUR CRAFT",
@@ -185,41 +135,6 @@ export const translations: Record<Language, Translation> = {
     hero: {
       tagline: "جوهر الأناقة",
       cta: "اكتشف المجموعة",
-    },
-    notes: {
-      label: "التركيبة",
-      heading: "كل عطر... في ثلاث حركات",
-      intro:
-        "عطر VELORIA ليس انطباعًا واحدًا، بل يتكشّف على مراحل متتالية خلال ساعات ارتدائه.",
-      stages: [
-        {
-          numeral: "I",
-          label: "النفحات العلوية",
-          title: "النفحات العلوية",
-          duration: "٠ – ١٥ دقيقة",
-          description:
-            "الانطباع الأول — مشرق وعابر، يتلاشى بعد لحظات من ظهوره.",
-          notes: ["برغموت", "فلفل وردي", "يوسفي", "قشور حمضية"],
-        },
-        {
-          numeral: "II",
-          label: "نفحات القلب",
-          title: "نفحات القلب",
-          duration: "١٥ دقيقة – ٤ ساعات",
-          description:
-            "روح العطر، تظهر مع تلاشي النفحات العلوية — حيث تكمن شخصيته الحقيقية.",
-          notes: ["ياسمين", "إيريس", "ورد", "زهر البرتقال"],
-        },
-        {
-          numeral: "III",
-          label: "النفحات الأساسية",
-          title: "النفحات الأساسية",
-          duration: "أكثر من ٤ ساعات",
-          description:
-            "الأساس الذي يبقى طويلًا — عميق ودافئ، ويحمل توقيعك الخاص.",
-          notes: ["عنبر", "خشب الصندل", "مسك أبيض", "فانيليا"],
-        },
-      ],
     },
     craft: {
       label: "حرفتنا",
